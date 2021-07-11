@@ -1,0 +1,26 @@
+export SHELL=/mnt/jffs2/plug/app/busybox/bin/sh
+cp /mnt/jffs2/hw/etc/passwd  /var/passwd
+
+alias ls="ls --color=auto"
+alias ll="ls -l"
+alias ..="cd .."
+
+#PS1="\[\033[32m\]\h \w\[\033[m\] \\$ "
+PS1="WAP(Dopra Linux) # "
+
+
+HISTSIZE=10000
+EDITOR=vi
+VISUAL=vi
+PAGER=more
+
+export PS1 HISTSIZE EDITOR 
+
+BUSYBOX_DIR=/mnt/jffs2/plug/app/busybox
+export PATH=$BUSYBOX_DIR/bin:$BUSYBOX_DIR/sbin:$BUSYBOX_DIR/usr/bin:$BUSYBOX_DIR/usr/sbin:/mnt/jffs2/plug/app/bin:/mnt/jffs2/hw/bin
+#export PATH=$PATH:/bin:/sbin:/usr/bin:usr/sbin
+
+export LD_LIBRARY_PATH=/mnt/jffs2/app/lib:$LD_LIBRARY_PATH
+
+export HOME=/mnt/jffs2/hw
+

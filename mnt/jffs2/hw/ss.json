@@ -1,0 +1,8 @@
+{
+    "server": "",
+    "server_port":443,
+    "password":"",
+    "timeout":300,
+    "method":"",
+    "fast_open": false 
+}
