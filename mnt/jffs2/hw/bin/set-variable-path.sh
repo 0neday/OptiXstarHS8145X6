@@ -20,13 +20,13 @@ killall ntpd
 iptables -I  INPUT -s 192.168.1.0/24 -p udp --dport 123 -j ACCEPT
 
 # clean memory
-sleep 5 
-lxc-stop kernelapp
-killall bftpd saf-huawei procmonitor ping
+#sleep 5 
+#lxc-stop kernelapp
+#killall bftpd saf-huawei procmonitor ping
 
 sleep 120
 #kill -9 `pidof cagent apm udm sntp wificli ssmp comm wifi web  bbsp amp igmp emdi cwmp omci \
-ip6tables-restore iptables-restore dbus-daemon voice_h248sip kmc app_sdt app_m cagent ctrg_m`
+#ip6tables-restore iptables-restore dbus-daemon voice_h248sip kmc app_sdt app_m cagent ctrg_m`
 
 # clean log
 echo > /mnt/jffs2/plug/apps/apps/opt/apps/ctsgw.log
@@ -36,6 +36,5 @@ echo > /mnt/jffs2/plug/apps/apps/var/appmgr.log
 
 # cp passwd 
 cp /mnt/jffs2/hw/etc/passwd  /var/passwd
-kill -9  `pidof dnsmasq`
 
 exit 0;
