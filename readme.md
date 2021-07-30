@@ -1,5 +1,5 @@
 ## Note
-start shell scripts on hs8145x6 lxc contianer
+start shell scripts on hs8145x6 lxc container 
 ## Usage
 put `/mnt/jffs2/hw/getshell.sh` into `/opt/upt/apps/apps/etc/rc.local`
  and
