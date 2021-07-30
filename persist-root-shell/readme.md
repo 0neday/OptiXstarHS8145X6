@@ -40,4 +40,5 @@ make ARCH=arm KERNEL=/mnt/linux-4.4.197 CROSS_COMPILE=/mnt/gcc-linaro-4.9.4-2017
 [ 5188.609649] [<c0012d3c>] (rtos_unwind_backtrace) from [<c000e518>] (show_stack+0x10/0x14)
 [ 5188.609686] [<c000e518>] (show_stack) from [<c023cd20>] (dump_stack+0x88/0xa8)
 ``` 
-
+## License
+[MIT](https://opensource.org/licenses/MIT)
