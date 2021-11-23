@@ -5,11 +5,10 @@ alias ls="ls --color=auto"
 alias ll="ls -l"
 alias ..="cd .."
 
-#PS1="\[\033[32m\]\h \w\[\033[m\] \\$ "
-PS1="WAP(Dopra Linux) # "
+PS1="\[\033[32m\][root@\h \w]\[\033[m\] \\$ "
+#PS1="WAP(Dopra Linux)_x6 # "
 
-
-HISTSIZE=10000
+HISTSIZE=1000
 EDITOR=vi
 VISUAL=vi
 PAGER=more
@@ -24,3 +23,7 @@ export LD_LIBRARY_PATH=/mnt/jffs2/app/lib:$LD_LIBRARY_PATH
 
 export HOME=/mnt/jffs2/hw
 
+# set nameserver
+echo "nameserver 127.0.0.1" > /var/wan/dns
+# set hostname
+echo x6 > /proc/sys/kernel/hostname

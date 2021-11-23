@@ -1,32 +1,41 @@
 #!/bin/sh
 
-# set security drop 
-iptables -I  INPUT -p tcp --dport 23 -j DROP
-iptables -I  INPUT -s 192.168.1.0/24 -p tcp --dport 23 -j ACCEPT
-iptables -I  INPUT -p tcp --dport 80 -j DROP
-iptables -I  INPUT -s 192.168.1.1/24 -p tcp --dport 80 -j ACCEPT
-iptables -I  INPUT -p tcp --dport 3333 -j DROP
-iptables -I  INPUT -p tcp --dport 5080 -j DROP
+# timer
+iptables -I INPUT -s 192.168.1.0/24 -p udp --dport 123 -j ACCEPT
 
-# set nameserver 
+# block quic
+#/mnt/jffs2/hw/bin/quic.sh &
+
+# block google
+/mnt/jffs2/hw/bin/google.sh &
+
+# set nameserver
 echo "nameserver 127.0.0.1" > /var/wan/dns
-
-# forward all data
-iptables -A FWD_FIREWALL_COMMON -i br+ -j ACCEPT
 
 # set time
 killall ntpd
-/mnt/jffs2/plug/app/busybox/usr/sbin/ntpd -n -p ntp1.aliyun.com -l -N &
-iptables -I  INPUT -s 192.168.1.0/24 -p udp --dport 123 -j ACCEPT
+sleep 1
+/mnt/jffs2/plug/app/busybox/usr/sbin/ntpd -n -p 120.25.115.20 -l -N &
 
-# clean memory
-#sleep 5 
-#lxc-stop kernelapp
-#killall bftpd saf-huawei procmonitor ping
+# cp passwd
+#cp /mnt/jffs2/hw/etc/passwd  /var/passwd
 
-sleep 120
-#kill -9 `pidof cagent apm udm sntp wificli ssmp comm wifi web  bbsp amp igmp emdi cwmp omci \
-#ip6tables-restore iptables-restore dbus-daemon voice_h248sip kmc app_sdt app_m cagent ctrg_m`
+# clean
+sleep 1 
+killall bftpd saf-huawei procmonitor easymesh
+
+sleep 1
+lxc-stop kernelapp
+umount  /dev/mtdblock9
+ip link del dev lxcbr0
+
+# update cf dns
+#sleep 1 
+#/mnt/jffs2/hw/bin/cloudflare-update-record.sh &
+
+# update vultr dns 
+sleep 1
+/mnt/jffs2/hw/bin/vultr_ddns.sh &
 
 # clean log
 echo > /mnt/jffs2/plug/apps/apps/opt/apps/ctsgw.log
@@ -34,7 +43,20 @@ echo > /mnt/jffs2/plug/apps/apps/tmp/.uci/u01.log
 echo > /mnt/jffs2/plug/apps/apps/tmp/.uci/gamespeeder.log
 echo > /mnt/jffs2/plug/apps/apps/var/appmgr.log
 
-# cp passwd 
-cp /mnt/jffs2/hw/etc/passwd  /var/passwd
+# wireguard-go 
+/mnt/jffs2/hw/bin/vpn-client.sh
+
+# rmmod ko
+sleep 1 
+/mnt/jffs2/hw/bin/ko-rmmod.sh
+
+#
+kill -9 `pidof 1.sdk_init.sh`
+
+sleep 1
+kill -9 `pidof dbus-daemon ctrg_m cwmp `
+
+#sleep 30
+kill -9 `pidof app_m app_sdt voice_h248sip apm wificli wifi ssmp sntp udm comm web ip6tables-restore`
 
 exit 0;
