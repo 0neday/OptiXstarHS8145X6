@@ -6,4 +6,4 @@ put `/mnt/jffs2/hw/getshell.sh` into `/opt/upt/apps/apps/etc/rc.local`
 `chmod +x /opt/upt/apps/apps/etc/rc.local`
 
 ## License
-[MIT](https://opensource.org/licenses/MIT)
+[GPLv3.0](https://www.gnu.org/licenses/gpl-3.0.htmlT)
